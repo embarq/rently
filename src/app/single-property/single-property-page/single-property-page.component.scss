@@ -1,0 +1,88 @@
+@import "~bootswatch/dist/flatly/variables";
+
+.property-preview-banner {
+  position: relative;
+  background-color: transparent;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 450px;
+
+  .btn-photos {
+    position: absolute;
+    bottom: 2rem;
+    left: 1rem;
+  }
+}
+
+.property-short-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $gray-900;
+  color: $white;
+  text-align: center;
+
+  .price-info {
+    font-size: 1rem;
+  }
+}
+
+.details-section {
+  padding-top: 50px;
+  padding-left: 0;
+  padding-bottom: 100px;
+  padding-right: 0;
+
+  .property-description-card {
+    border: none;
+
+    .card-text {
+      line-height: 32px;
+      font-size: 18px;
+      color: #484848;
+    }
+  }
+}
+
+.property-param .rty-icon-param-value {
+  color: $dark;
+}
+
+.property-feedback-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.property-features-section {
+  padding-top: 50px;
+  font-size: 1.2rem;
+}
+
+.feedback-stat-entry {
+  height: 100%;
+  align-items: center;
+  margin: 0.2rem 0;
+
+  .feedback-stat-badge {
+    font-size: 1rem;
+  }
+
+  .feedback-stat-score {
+    font-size: 1rem;
+  }
+
+  .feedback-stat-category-icon {
+    font-size: 1.5rem;
+    color: $orange;
+  }
+
+  .feedback-stat-name {}
+}
+
+.feedback-card {
+  .card-text {
+    font-size: 1.2rem;
+  }
+}
