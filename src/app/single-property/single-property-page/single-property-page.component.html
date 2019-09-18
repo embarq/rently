@@ -1,0 +1,228 @@
+<div
+  *ngIf="data$ | async as data"
+  class="container-fluid p-0">
+
+  <div class="row no-gutters">
+    <div class="col-md-7">
+      <div
+        class="property-preview-banner"
+        [style.backgroundImage]="'url(' + data.preview + ')'">
+        <button class="btn btn-light btn-photos text-primary">Photos</button>
+      </div>
+    </div>
+    <div class="col-md-5 property-short-info">
+      <div>
+        <h2 class="mb-4 font-weight-bold">
+          {{ data.streetNumber }} {{ data.street }}, {{ data.state }} {{ data.zipCode }}
+        </h2>
+        <p class="text-muted">
+          <i class="fa fa-circle"></i>&nbsp;{{ data.state }}
+        </p>
+      </div>
+
+      <div class="badge badge-secondary p-3 price-info">{{ data.price | currency }}</div>
+
+      <div class="row">
+        <div class="col">
+          <rty-icon-param
+            [value]="data.areaSizeSquares"
+            label="Sq Ft"
+            icon="home"
+            class="property-param text-muted">
+          </rty-icon-param>
+        </div>
+        <div class="col">
+          <rty-icon-param
+            [value]="data.beds"
+            label="Beds"
+            icon="bed"
+            class="property-param text-muted">
+          </rty-icon-param>
+        </div>
+        <div class="col">
+          <rty-icon-param
+            [value]="data.bathrooms"
+            label="Baths"
+            icon="bath"
+            class="property-param text-muted">
+          </rty-icon-param>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="data$ | async as data"
+  id="details"
+  class="container-fluid bg-light details-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 property-details">
+        <h2 class="h1 mb-4">
+          Apartment Building Having 29 Apartments
+        </h2>
+
+        <strong class="text-primary">{{ data.mortgage.listPrice | currency }}</strong>
+
+        <p>
+          <span class="text-muted">Est. Mortgage:&nbsp;</span>
+          <strong>{{ data.mortgage.paymentEstimate | currency }}/mo</strong>
+        </p>
+
+        <div class="row no-gutters">
+          <div class="col">
+            <span class="text-muted">Created</span>: <strong>September 2, 2018</strong>
+          </div>
+          <div class="col">
+            <span class="text-muted">Last Update</span>: <strong>October 25</strong>
+          </div>
+        </div>
+
+        <hr class="my-5" />
+
+        <div class="row">
+          <div class="col">
+            <rty-icon-param
+              [value]="data.areaSizeSquares"
+              label="Sq Ft"
+              icon="home"
+              class="property-param text-muted">
+            </rty-icon-param>
+          </div>
+          <div class="col">
+            <rty-icon-param
+              [value]="data.beds"
+              label="Beds"
+              icon="bed"
+              class="property-param text-muted">
+            </rty-icon-param>
+          </div>
+          <div class="col">
+            <rty-icon-param
+              [value]="data.bathrooms"
+              label="Baths"
+              icon="bath"
+              class="property-param text-muted">
+            </rty-icon-param>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 d-flex align-items-center">
+        <div class="card property-description-card">
+          <div class="card-body py-4">
+            <div class="card-text">
+              {{ data.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="data$ | async as data"
+  class="container property-features-section">
+  <div class="card border-0">
+    <div class="card-body bg-light">
+      <h3 class="mb-3">Amenities & Features</h3>
+
+      <div class="row">
+        <div
+          *ngFor="let entry of data.features"
+          class="col-4">
+
+          <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
+            <span [class]="entry.data === 'Yes' ? 'text-primary' : 'text-muted'">{{ entry.lbl }}</span>
+            <ng-container *ngIf="entry.data !== 'Yes'">
+              :&nbsp;
+              <strong>{{ entry.data }}</strong>
+            </ng-container>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 mt-3">
+    <div class="card-body bg-light">
+      <h4 class="mb-3">Public records</h4>
+
+      <div class="row">
+        <div
+          *ngFor="let entry of data.records"
+          class="col-md-4">
+
+          <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
+            <span [class]="entry.data === 'Yes' ? 'text-primary' : 'text-muted'">{{ entry.lbl }}</span>
+            <ng-container *ngIf="entry.data !== 'Yes'">
+              :&nbsp;
+              <strong>{{ entry.data }}</strong>
+            </ng-container>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="data$ | async as data"
+  id="property-feedback-section"
+  class="container property-feedback-section">
+  <div class="card border-0">
+    <div class="card-body bg-light">
+      <h3>What Locals Say</h3>
+      <p class="text-muted mb-4">At least {{ data.neighborhoodVibes.stats.minimumResponseCount }} Rently users voted on each feature.</p>
+
+      <div class="row">
+        <div
+          *ngFor="let entry of data.neighborhoodVibes.stats.attributes"
+          class="col-4">
+          <div class="row no-gutters feedback-stat-entry">
+            <div class="col-3">
+              <div class="badge badge-primary feedback-stat-badge text-light w-100">
+                <i class="fas fa-thumbs-up"></i>&nbsp;
+                <strong class="feedback-stat-score-value">{{ entry.score }}%</strong>
+              </div>
+            </div>
+            <div class="col-2 text-center text-primary">
+              <span class="fas {{ getAttributeIcon(entry.attributeId) }} feedback-stat-category-icon"></span>
+            </div>
+            <div class="col-7">
+              {{ entry.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div
+      *ngFor="let entry of data.reviews"
+      class="col-4">
+      <div class="card h-100 border-0 feedback-card">
+        <div class="card-body bg-light">
+          <div class="row no-gutters align-items-center">
+            <div class="col-3 text-center">
+              <i class="fas fa-user-circle text-muted" style="font-size: 3rem"></i>
+            </div>
+            <div class="col-9">
+              <h4>{{ entry.userName }}</h4>
+              <p class="m-0">
+                Resident - 11mo ago
+              </p>
+            </div>
+          </div>
+          <p class="p-3 m-0 card-text">
+            {{ entry.textReview }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

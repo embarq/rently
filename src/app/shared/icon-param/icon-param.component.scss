@@ -1,0 +1,27 @@
+.rty-icon-param-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rty-icon-param-icon {
+  font-size: 1.75rem;
+}
+
+.rty-icon-param-content {
+  margin-left: 0.75rem;
+  text-align: left;
+
+  .rty-icon-param-value,
+  .rty-icon-param-label {
+    margin: 0;
+  }
+
+  .rty-icon-param-label {
+    line-height: 1;
+  }
+
+  .rty-icon-param-value {
+    font-size: 1.2rem;
+  }
+}

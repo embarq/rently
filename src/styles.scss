@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+$blue:    #2a41e8;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #e83e8c;
+$red:     #E74C3C;
+$orange:  #ff5e14;
+$yellow:  #F39C12;
+$green:   #18BC9C;
+$teal:    #20c997;
+$cyan:    #3498DB;
+
+$primary: $blue;
+$secondary: $orange;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+
+$link-color: $primary;
+$font-size-base: 1rem;
+$font-family-sans-serif: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+@import "~bootswatch/dist/flatly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/flatly/bootswatch";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import url('../node_modules/@fortawesome/fontawesome-free/css/solid.min.css');
+
+.bg-dark {
+  background-color: $dark !important;
+}
+
+.bg-light {
+  background-color: #fafafa !important;
+}
+
+.badge-white {
+  background-color: #ffffff;
+}
