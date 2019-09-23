@@ -20,7 +20,7 @@ export class PropertiesComponent implements OnInit {
     private propertiesService: PropertiesService
   ) {
     this.properties$ = observableOf([]).pipe(
-      switchMapTo(this.propertiesService.getProperties()),
+      switchMapTo(this.propertiesService.getAll()),
       share()
     );
     this.propertiesListLayout$ = new BehaviorSubject('list');
