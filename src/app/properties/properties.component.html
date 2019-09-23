@@ -1,10 +1,10 @@
-<div class="container pb-3">
-
+<div class="container pt-3">
   <div class="row">
-    <div
-      *ngFor="let prop of properties$ | async"
-      class="col-6 mb-4">
-      <rty-property-card [data]="prop"></rty-property-card>
+    <div class="col-3">
+      <rty-properties-filters></rty-properties-filters>
+    </div>
+    <div class="col-9">
+      <rty-properties-list [properties]="properties$ | async"></rty-properties-list>
     </div>
   </div>
 </div>

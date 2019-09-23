@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Property } from '../core-model/properties';
 import { PropertiesService } from '../core/properties.service';
-import { filter, first } from 'rxjs/operators';
 
 @Component({
   selector: 'rty-properties',
@@ -15,17 +14,9 @@ export class PropertiesComponent implements OnInit {
   properties$: Observable<Property[]>;
 
   constructor(
-    private propertiesService: PropertiesService,
-    private cdRef: ChangeDetectorRef
+    private propertiesService: PropertiesService
   ) {
     this.properties$ = this.propertiesService.getProperties();
-
-    this.properties$.pipe(
-      filter(data => data != null),
-      first()
-    ).subscribe(() => {
-      this.cdRef.markForCheck();
-    })
   }
 
   ngOnInit() {
