@@ -1,0 +1,144 @@
+<form novalidate>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="text"
+      name="keyword"
+      id="keyword-txt"
+      placeholder="Keyword">
+  </div>
+
+  <div class="form-group">
+
+    <label>Price</label>
+
+    <ng5-slider
+      [options]="{ floor: 0, ceil: 30000000, step: 10000 }"
+      class="price-filter-slider">
+    </ng5-slider>
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="location">Location</label>
+    <select class="custom-select" name="location" id="location">
+      <option value="any" selected="selected">Select Location</option>
+      <option value="beverly-hills"> Beverly Hills</option>
+      <option value="los-angeles"> Los Angeles</option>
+      <option value="mission-viejo"> Mission Viejo</option>
+      <option value="newport-beach"> Newport Beach</option>
+      <option value="pasadena"> Pasadena</option>
+      <option value="santa-monica"> Santa Monica</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="select-status">Status</label>
+    <select class="custom-select" name="status" id="select-status">
+      <option value="any" selected="selected">Select Status</option>
+      <option value="for-rent">For Rent</option>
+      <option value="for-sale">For Sale</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="select-property-type">Type</label>
+    <select name="type" id="select-property-type" class="custom-select">
+      <option value="any" selected="selected">Select Type</option>
+      <option value="commercial"> Commercial</option>
+      <option value="office">- Office</option>
+      <option value="shop">- Shop</option>
+      <option value="condo"> Condo</option>
+      <option value="residential"> Residential</option>
+      <option value="apartment">- Apartment</option>
+      <option value="house">- House</option>
+      <option value="residential-tower">- Residential Tower</option>
+      <option value="summer-house">- Summer House</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="select-bedrooms">Min Beds</label>
+        <select name="bedrooms" id="select-bedrooms" class="custom-select">
+          <option value="any" selected="selected">Any</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group">
+        <label for="select-bathrooms">Min Baths</label>
+        <select name="bathrooms" id="select-bathrooms" class="custom-select">
+          <option value="any" selected="selected">Any</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="min-area">Min Area</label>
+        <input
+          class="form-control"
+          type="text"
+          name="min-area"
+          id="min-area"
+          pattern="[0-9]+"
+          placeholder="Any"
+          title="Please only provide digits!">
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group">
+        <label for="max-area">Max Area</label>
+        <input
+          class="form-control"
+          type="text"
+          name="max-area"
+          id="max-area"
+          pattern="[0-9]+"
+          placeholder="Any"
+          title="Please only provide digits!">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button
+      class="btn btn-primary w-100"
+      type="submit">
+      Search
+    </button>
+  </div>
+
+</form>
