@@ -107,6 +107,7 @@ export interface Property {
   neighborhood: string;
   originalUrl: string;
   picturesCollection: string[];
+  publicResponseCount: number;
   previewImageUrl: string;
   price: number;
   pricePerSquare: number;
