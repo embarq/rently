@@ -170,24 +170,24 @@
 </div>
 
 <div
-  *ngIf="data$ | async as data"
+  *ngIf="localsFeedbackAvailable$ | async"
   id="property-feedback-section"
   class="container property-feedback-section">
   <div class="card border-0">
     <div class="card-body bg-light">
       <h3>What Locals Say</h3>
-      <ng-container *ngIf="!(data.stats | isEmpty)">
-        <p class="text-muted mb-4">At least {{ data.publicResponseCount }} Rently users voted on each feature.</p>
+      <ng-container *ngIf="stats$ | async as publicStats">
+        <p class="text-muted mb-4">At least {{ (data$ | async)?.publicResponseCount }} Rently users voted on each feature.</p>
 
         <div class="row">
           <div
-            *ngFor="let entry of data.neighborhoodVibes.stats.attributes"
+            *ngFor="let entry of publicStats"
             class="col-4">
             <div class="row no-gutters feedback-stat-entry">
               <div class="col-3">
                 <div class="badge badge-primary feedback-stat-badge text-light w-100">
                   <i class="fas fa-thumbs-up"></i>&nbsp;
-                  <strong class="feedback-stat-score-value">{{ entry.score }}%</strong>
+                  <span class="feedback-stat-score-value">{{ entry.score }}%</span>
                 </div>
               </div>
               <div class="col-2 text-center text-primary">
@@ -203,9 +203,9 @@
     </div>
   </div>
 
-  <div *ngIf="!(data.reviews | isEmpty)" class="row mt-4">
+  <div *ngIf="reviews$ | async as reviews" class="row mt-4">
     <div
-      *ngFor="let entry of data.reviews"
+      *ngFor="let entry of reviews"
       class="col-4">
       <div class="card h-100 border-0 feedback-card">
         <div class="card-body bg-light">

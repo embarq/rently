@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, race } from 'rxjs';
 
-import { Property } from 'src/app/core-model/properties';
-import { map } from 'rxjs/operators';
+import { Property, PropertyStatsAttribute, PropertyReview } from 'src/app/core-model/properties';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { PropertiesService } from 'src/app/core/properties.service';
 
 @Component({
   selector: 'rty-single-property-page',
@@ -12,13 +13,18 @@ import { map } from 'rxjs/operators';
 })
 export class SinglePropertyPageComponent implements OnInit {
   data$: Observable<Property>;
-  neighborhoodStatAttributesMapping;
+  stats$: Observable<PropertyStatsAttribute[]>;
+  reviews$: Observable<PropertyReview[]>;
+  neighborhoodStatAttributesMapping: { [id: number]: string };
+  localsFeedbackAvailable$: Observable<boolean>;
 
-  constructor(activatedRoute: ActivatedRoute) {
+  constructor(
+    activatedRoute: ActivatedRoute,
+    private propertiesService: PropertiesService
+  ) {
     this.data$ = activatedRoute.data.pipe(
       map(resolved => resolved.propertyData),
       map(data => {
-        // 'https://static.trulia-cdn.com/pictures/thumbs_5/zillowstatic/ISrhukqzi1hb5g1000000000.webp'
         const prefix = 'https://static.trulia-cdn.com/pictures';
         const picturesCollection = data.picturesCollection.map(entry => {
           return `${ prefix }/${ entry }`;
@@ -29,10 +35,23 @@ export class SinglePropertyPageComponent implements OnInit {
           preview: picturesCollection[0],
           picturesCollection
         }
-      })
+      }),
+      tap(console.log)
     );
 
-    this.data$.subscribe(console.log);
+    const propertyId$ = activatedRoute.params.pipe(
+      map(params => params['id'])
+    );
+
+    this.stats$ = propertyId$.pipe(
+      switchMap(id => this.propertiesService.getPublicStats(id))
+    );
+    this.reviews$ = propertyId$.pipe(
+      switchMap(id => this.propertiesService.getReviews(id))
+    );
+    this.localsFeedbackAvailable$ = race(this.stats$, this.reviews$).pipe(
+      map(() => (true)),
+    );
 
     this.neighborhoodStatAttributesMapping = {
       1: 'fa-smile',
