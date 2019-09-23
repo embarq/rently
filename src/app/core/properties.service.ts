@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Property, LabeledData } from '../core-model/properties';
+import { Property, LabeledData, PropertyStatsAttribute, PropertyReview } from '../core-model/properties';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class PropertiesService {
     private firestore: AngularFirestore
   ) { }
 
-  public getProperties() {
+  public getAll() {
     return this.firestore.collection<Property>('places').valueChanges();
   }
 
@@ -25,25 +25,30 @@ export class PropertiesService {
       );
   }
 
-  public getPropertyFeatures(propertyId: Property['id']) {
-    return this.firestore
-      .collection('places')
-      .doc(propertyId)
-      .collection<LabeledData>('features')
-      .get()
-      .pipe(
-        map(snap => snap.docs.map(doc => doc.data()))
-      );
+  public getFeatures(propertyId: Property['id']) {
+    return this.getSubCollection<LabeledData>(propertyId, 'features');
   }
 
-  public getPropertyRecords(propertyId: Property['id']) {
+  public getRecords(propertyId: Property['id']) {
+    return this.getSubCollection<LabeledData>(propertyId, 'records');
+  }
+
+  public getPublicStats(propertyId: Property['id']) {
+    return this.getSubCollection<PropertyStatsAttribute>(propertyId, 'stats');
+  }
+
+  public getReviews(propertyId: Property['id']) {
+    return this.getSubCollection<PropertyReview>(propertyId, 'reviews');
+  }
+
+  private getSubCollection<DataType = any>(propertyId: Property['id'], collection: string) {
     return this.firestore
       .collection('places')
       .doc(propertyId)
-      .collection<LabeledData>('records')
+      .collection<DataType>(collection)
       .get()
       .pipe(
-        map(snap => snap.docs.map(doc => doc.data()))
+        map(snap => snap.docs.map(doc => doc.data() as DataType))
       );
   }
 }

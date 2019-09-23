@@ -13,12 +13,12 @@ export class PropertyResolver implements Resolve<any> {
     private propertiesService: PropertiesService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot) {
     if ('id' in route.params) {
       return combineLatest(
         this.propertiesService.getById(route.params.id),
-        this.propertiesService.getPropertyFeatures(route.params.id),
-        this.propertiesService.getPropertyRecords(route.params.id)
+        this.propertiesService.getFeatures(route.params.id),
+        this.propertiesService.getRecords(route.params.id)
       ).pipe(
         map(([ prop, features, records ]) => {
           return {
