@@ -105,15 +105,12 @@ export interface Property {
   lotAreaSize: string;
   mortgage: PropertyMortgage;
   neighborhood: string;
-  neighborhoodVibes: NeighborhoodVibes;
   originalUrl: string;
   picturesCollection: string[];
-  previewBannerImageUrl: string;
+  previewImageUrl: string;
   price: number;
   pricePerSquare: number;
   propertyType: string;
-  reviews: PropertyReview[];
-  saleIdType: string;
   sellingType: string;
   state: string;
   street: string;
@@ -128,6 +125,8 @@ export type ExtendedProperty = Property & {
   records?: LabeledData[];
   provider?: LabeledData[];
   attr?: LabeledData[];
+  stats?: LabeledData[]
   agents?: PropertyAgent[];
   scoop?: PropertyScoop[];
+  reviews?: PropertyReview[];
 }
