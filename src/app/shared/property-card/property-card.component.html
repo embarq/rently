@@ -1,0 +1,93 @@
+<div *ngIf="data != null" class="card prop-card">
+
+  <div
+    [bgImg]="propPreviewImageUrl"
+    class="card-img-top prop-card-top">
+    <div class="prop-card-top-header">
+      <div class="row">
+        <div class="col-9">
+          <div class="btn btn-primary btn-sm text-uppercase">House</div>
+          <div class="d-inline-block ml-3"></div>
+          <div class="btn btn-secondary btn-sm text-uppercase">
+            {{ data.sellingType }}
+          </div>
+        </div>
+        <div class="col-3 text-right">
+          <button
+            [disabled]="data.picturesCollection | isEmpty"
+            type="button"
+            class="btn btn-light"
+            [class.text-primary]="data.picturesCollection | isEmpty">
+            <i class="fas fa-images"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="prop-card-top-footer">
+      <div class="row">
+        <div class="col-8">
+          <div class="btn btn-light text-primary">
+            <strong>{{ data.price | currency }}</strong>
+          </div>
+        </div>
+        <div class="col-4 text-right">
+          <button
+            type="button"
+            class="btn btn-light text-muted">
+            <i class="fas fa-heart"></i>
+          </button>
+          <div class="d-inline-block ml-2"></div>
+          <button
+            type="button"
+            class="btn btn-light text-muted">
+            <i class="fas fa-balance-scale"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <p class="text-muted">
+      <i class="fas fa-map-marker-alt"></i>
+      &nbsp;
+      {{ data.state }}
+    </p>
+
+    <h4 class="mb-3">
+      <a
+        [routerLink]="['.', data.id]"
+        class="text-dark">
+        {{ data | composePropAddress }}
+      </a>
+    </h4>
+
+    <p class="d-flex justify-content-between text-muted">
+      <span>
+        <i class="fas fa-user-tie"></i>
+        &nbsp;
+        {{ data.listedBy }}
+      </span>
+
+      <span>
+        <i class="fas fa-calendar-alt"></i>
+        &nbsp;
+        2 month ago
+      </span>
+    </p>
+
+    <hr />
+
+    <div class="d-flex justify-content-between">
+      <span>
+        <i class="fas fa-home"></i> {{ data.areaSizeSquares }} Sq ft
+      </span>
+      <span>
+        <span><i class="fas fa-bed"></i> {{ data.beds }}</span>
+        <div class="d-inline-block ml-2">&nbsp;</div>
+        <span><i class="fas fa-bath"></i> {{ data.bathrooms }}</span>
+      </span>
+    </div>
+  </div>
+
+</div>

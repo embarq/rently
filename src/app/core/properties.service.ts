@@ -12,7 +12,7 @@ export class PropertiesService {
   ) { }
 
   public getProperties() {
-    return this.firestore.collection('places').valueChanges();
+    return this.firestore.collection<Property>('places').valueChanges();
   }
 
   public getById(propertyId: Property['id']) {
