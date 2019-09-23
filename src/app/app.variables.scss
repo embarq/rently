@@ -1,0 +1,36 @@
+$web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic";
+$font-family-sans-serif: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #ecf0f1 !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #b4bcc2 !default;
+$gray-600: #95a5a6 !default;
+$gray-700: #7b8a8b !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$blue:    #2a41e8;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #e83e8c;
+$red:     #E74C3C;
+$orange:  #ff5e14;
+$yellow:  #F39C12;
+$green:   #18BC9C;
+$teal:    #20c997;
+$cyan:    #3498DB;
+$dimmed-white:   #fafafa;
+
+$primary: $blue;
+$secondary: $orange;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+
+$link-color: $primary;
+$font-size-base: 1rem;

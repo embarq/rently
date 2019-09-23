@@ -5,6 +5,15 @@ import { PropertyResolver } from './core/property.resolver';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'properties'
+  },
+  {
+    path: 'properties',
+    loadChildren: () => import('./properties/properties.module').then(m => m.PropertiesModule)
+  },
+  {
     path: 'properties/:id',
     loadChildren: () => import('./single-property/single-property.module').then(m => m.SinglePropertyModule),
     resolve: {

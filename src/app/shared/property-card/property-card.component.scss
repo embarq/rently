@@ -1,0 +1,23 @@
+@import '../../app.variables';
+
+.prop-card {
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: $white;
+
+  .prop-card-top {
+    position: relative;
+    height: 250px;
+    padding: 20px;
+  }
+
+  .prop-card-top-header {
+  }
+
+  .prop-card-top-footer {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
+  }
+}
