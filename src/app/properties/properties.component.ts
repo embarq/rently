@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
+import { switchMapTo, share } from 'rxjs/operators';
 
 import { Property } from '../core-model/properties';
 import { PropertiesService } from '../core/properties.service';
+import { PropertiesDisplayLayout } from './properties-vm';
 
 @Component({
   selector: 'rty-properties',
@@ -12,14 +14,23 @@ import { PropertiesService } from '../core/properties.service';
 })
 export class PropertiesComponent implements OnInit {
   properties$: Observable<Property[]>;
+  propertiesListLayout$: BehaviorSubject<PropertiesDisplayLayout>;
 
   constructor(
     private propertiesService: PropertiesService
   ) {
-    this.properties$ = this.propertiesService.getProperties();
+    this.properties$ = observableOf([]).pipe(
+      switchMapTo(this.propertiesService.getProperties()),
+      share()
+    );
+    this.propertiesListLayout$ = new BehaviorSubject('list');
   }
 
   ngOnInit() {
+  }
+
+  setPropertiesLayout(layout: PropertiesDisplayLayout) {
+    this.propertiesListLayout$.next(layout);
   }
 
 }

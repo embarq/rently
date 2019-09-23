@@ -1,0 +1,81 @@
+<div *ngIf="data != null" class="card prop-card-horizontal border-0">
+  <div class="row no-gutters">
+    <div class="col-5 p-3">
+      <div
+        [bgImg]="propPreviewImageUrl"
+        class="card-img-top prop-card-top">
+        <div class="prop-card-top-header">
+          <button
+            [disabled]="data.picturesCollection | isEmpty"
+            type="button"
+            class="btn  btn-sm btn-light"
+            [class.text-primary]="!(data.picturesCollection | isEmpty)">
+            <i class="fas fa-images"></i>
+          </button>
+        </div>
+        <div class="prop-card-top-footer">
+          <button
+            type="button"
+            class="btn  btn-sm btn-light text-muted">
+            <i class="fas fa-heart"></i>
+          </button>
+          <div class="d-inline-block ml-2"></div>
+          <button
+            type="button"
+            class="btn  btn-sm btn-light text-muted">
+            <i class="fas fa-balance-scale"></i>
+          </button>
+        </div>
+      </div>  <!-- card-img-top -->
+    </div>  <!-- col -->
+
+    <div class="col-7">
+      <div class="card-body">
+        <div class="btn btn-primary mb-3 px-2">
+          {{ data.price | currency }}
+        </div>
+
+        <h4 class="mb-3">
+          <a
+            [routerLink]="['.', data.id]"
+            class="text-dark">
+            {{ data | composePropAddress }}
+          </a>
+        </h4>
+
+        <p class="text-muted">
+          {{ data.propertyType }} / {{ data.sellingType }} - {{ data.state }}
+        </p>
+
+        <p class="d-flex justify-content-between text-muted">
+          <span>
+            <i class="fas fa-user-tie"></i>
+            &nbsp;
+            <span *ngIf="!(data.listedBy | isEmpty); else undefinedRealtorTempl">{{ data.listedBy }}</span>
+            <ng-template #undefinedRealtorTempl>n/a</ng-template>
+          </span>
+
+          <span>
+            <i class="fas fa-calendar-alt"></i>
+            &nbsp;
+            2 month ago
+          </span>
+        </p>
+
+        <hr />
+
+        <div class="d-flex justify-content-between">
+          <span>
+            <i class="fas fa-home"></i> <strong>{{ data.areaSizeSquares }}</strong> Sq ft
+          </span>
+          <span>
+            <span><i class="fas fa-bed"></i> {{ data.beds }}</span>
+            <div class="d-inline-block ml-2">&nbsp;</div>
+            <span><i class="fas fa-bath"></i> {{ data.bathrooms }}</span>
+          </span>
+        </div>
+      </div>  <!-- card-body -->
+    </div>  <!-- col -->
+  </div>  <!-- row -->
+
+</div>
