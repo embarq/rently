@@ -4,7 +4,49 @@
       <rty-properties-filters></rty-properties-filters>
     </div>
     <div class="col-9">
-      <rty-properties-list [properties]="properties$ | async"></rty-properties-list>
+      <div class="row mb-2">
+        <div class="col-3">
+          <p class="m-0">
+            {{ (properties$ | async)?.length }} results found
+          </p>
+        </div>
+        <div class="col-9 d-flex justify-content-end">
+          <form class="form-inline mr-4">
+            <label class="text-uppercase mr-2">Sort by</label>
+            <select class="form-control">
+              <option value="default"><span>Best match</span></option>
+              <option value="price-asc"><span>Price Low to High</span></option>
+              <option value="price-desc"><span>Price High to Low</span></option>
+              <option value="date-asc"><span>Date Old to New</span></option>
+              <option value="date-desc"><span>Date New to Old</span></option>
+            </select>
+          </form>
+
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button
+              (click)="setPropertiesLayout('list')"
+              [class.text-primary]="(propertiesListLayout$ | async) === 'list'"
+              type="button"
+              class="btn btn-light">
+              <i class="fas fa-list-ul"></i>
+            </button>
+            <button
+              (click)="setPropertiesLayout('grid')"
+              [class.text-primary]="(propertiesListLayout$ | async) === 'grid'"
+              type="button"
+              class="btn btn-light">
+              <i class="fas fa-th-large"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <rty-properties-list
+        [properties]="properties$ | async"
+        [layout]="propertiesListLayout$ | async">
+      </rty-properties-list>
     </div>
   </div>
 </div>

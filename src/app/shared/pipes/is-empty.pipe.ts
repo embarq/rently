@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash-es';
 export class IsEmptyPipe implements PipeTransform {
 
   transform(value: any): any {
-    return isEmpty(value);
+    return value == null || isEmpty(value);
   }
 
 }

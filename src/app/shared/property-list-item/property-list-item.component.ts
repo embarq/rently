@@ -1,15 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Property } from 'src/app/core-model/properties';
-import { environment } from 'src/environments/environment';
 import { isEmpty } from 'lodash-es';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'rty-property-card',
-  templateUrl: './property-card.component.html',
-  styleUrls: ['./property-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'rty-property-list-item',
+  templateUrl: './property-list-item.component.html',
+  styleUrls: ['./property-list-item.component.scss']
 })
-export class PropertyCardComponent implements OnInit {
+export class PropertyListItemComponent implements OnInit {
   @Input() data: Property;
 
   public propPreviewImageUrl: string = null;
