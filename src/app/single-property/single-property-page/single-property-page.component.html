@@ -6,14 +6,14 @@
     <div class="col-md-7">
       <div
         class="property-preview-banner"
-        [style.backgroundImage]="'url(' + data.preview + ')'">
+        [bgImg]="data.preview">
         <button class="btn btn-light btn-photos text-primary">Photos</button>
       </div>
     </div>
     <div class="col-md-5 property-short-info">
       <div>
         <h2 class="mb-4 font-weight-bold">
-          {{ data.streetNumber }} {{ data.street }}, {{ data.state }} {{ data.zipCode }}
+          {{ data | composePropAddress }}
         </h2>
         <p class="text-muted">
           <i class="fa fa-circle"></i>&nbsp;{{ data.state }}
@@ -176,32 +176,34 @@
   <div class="card border-0">
     <div class="card-body bg-light">
       <h3>What Locals Say</h3>
-      <p class="text-muted mb-4">At least {{ data.neighborhoodVibes.stats.minimumResponseCount }} Rently users voted on each feature.</p>
+      <ng-container *ngIf="!(data.stats | isEmpty)">
+        <p class="text-muted mb-4">At least {{ data.publicResponseCount }} Rently users voted on each feature.</p>
 
-      <div class="row">
-        <div
-          *ngFor="let entry of data.neighborhoodVibes.stats.attributes"
-          class="col-4">
-          <div class="row no-gutters feedback-stat-entry">
-            <div class="col-3">
-              <div class="badge badge-primary feedback-stat-badge text-light w-100">
-                <i class="fas fa-thumbs-up"></i>&nbsp;
-                <strong class="feedback-stat-score-value">{{ entry.score }}%</strong>
+        <div class="row">
+          <div
+            *ngFor="let entry of data.neighborhoodVibes.stats.attributes"
+            class="col-4">
+            <div class="row no-gutters feedback-stat-entry">
+              <div class="col-3">
+                <div class="badge badge-primary feedback-stat-badge text-light w-100">
+                  <i class="fas fa-thumbs-up"></i>&nbsp;
+                  <strong class="feedback-stat-score-value">{{ entry.score }}%</strong>
+                </div>
               </div>
-            </div>
-            <div class="col-2 text-center text-primary">
-              <span class="fas {{ getAttributeIcon(entry.attributeId) }} feedback-stat-category-icon"></span>
-            </div>
-            <div class="col-7">
-              {{ entry.name }}
+              <div class="col-2 text-center text-primary">
+                <span class="fas {{ getAttributeIcon(entry.attributeId) }} feedback-stat-category-icon"></span>
+              </div>
+              <div class="col-7">
+                {{ entry.name }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 
-  <div class="row mt-4">
+  <div *ngIf="!(data.reviews | isEmpty)" class="row mt-4">
     <div
       *ngFor="let entry of data.reviews"
       class="col-4">

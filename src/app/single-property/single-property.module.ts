@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SinglePropertyRoutingModule } from './single-property-routing.module';
 import { SinglePropertyPageComponent } from './single-property-page/single-property-page.component';
 import { SharedModule } from '../shared/shared.module';
+import { PipesModule } from '../shared/pipes/pipes.module';
+import { DirectivesModule } from '../shared/directives/directives.module';
 
 
 @NgModule({
@@ -12,6 +14,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    PipesModule,
+    DirectivesModule,
     SharedModule,
     SinglePropertyRoutingModule
   ]
