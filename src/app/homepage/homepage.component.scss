@@ -1,0 +1,101 @@
+@import '../app.variables';
+
+:host {
+  display: block;
+  background-color: $dimmed-white;
+}
+
+.section-hero-wrapper {
+  padding: 0;
+
+  .backdrop {
+    background-color: rgba(0,0,0,0.4);
+  }
+}
+
+.section-hero-banner {
+  display: block;
+  padding: 200px 0;
+  color: $white;
+
+  .search-widget-form {
+    display: flex;
+    align-items: center;
+
+    .custom-select, .form-control {
+      display: inline-block;
+      width: auto;
+    }
+
+    .form-control {
+      flex-grow: 1;
+    }
+  }
+}
+
+.section-featured-wrapper {
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+.section-featured {}
+
+.section-props-categories-wrapper {
+  padding: 80px 0;
+  background-color: $white;
+}
+
+.section-props-categories {}
+
+.section-testimonials-wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.section-testimonials {}
+
+.section-posting-hero-wrapper {
+  padding-top: 200px;
+  padding-left: 0;
+  padding-bottom: 200px;
+  padding-right: 0;
+}
+
+.section-posting-hero {
+  .card {
+    background-color: rgba(255,255,255,0.9);
+  }
+}
+
+.section-blog-preview-wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.section-blog-preview {}
+
+.area-properties-card {
+  height: 360px;
+  border-radius: 4px;
+
+  .card-backdrop,
+  .card-body {
+    height: 100%;
+  }
+
+  .card-backdrop {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .card-title {
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+  }
+}

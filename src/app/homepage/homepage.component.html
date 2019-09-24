@@ -1,0 +1,229 @@
+<div
+  bgImg="https://images.pexels.com/photos/688835/pexels-photo-688835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  class="container-fluid section-hero-wrapper">
+  <div class="backdrop">
+    <section name="hero" class="container">
+      <div class="section-hero-banner">
+        <h1>Let Us Guide You Home</h1>
+        <p class="mb-5">Find the house of your dreams</p>
+        <div class="card">
+          <div class="card-body">
+            <form class="search-widget-form">
+              <select name="" id="" class="custom-select mr-3">
+                <option value="" selected="selected">Select type</option>
+              </select>
+              <select name="" id="" class="custom-select mr-3">
+                <option value="" selected="selected">Select location</option>
+              </select>
+              <input type="text" class="form-control" placeholder="Search for properties, suburbs, or keywords…" />
+              <button class="btn btn-primary ml-3">Find properties</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="container-fluid section-featured-wrapper">
+  <section class="container section-featured">
+    <div class="text-center">
+      <h2 class="mb-5"><strong>Featured</strong> Properties</h2>
+    </div>
+    <div class="row">
+      <div
+        *ngFor="let entry of featured$ | async"
+        class="col-4 mb-4">
+        <rty-property-card [data]="entry"></rty-property-card>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a routerLink="/properties" class="btn btn-primary text-light text-uppercase">All properties</a>
+    </div>
+  </section>
+</div>
+
+<div class="container-fluid section-props-categories-wrapper">
+  <section class="container section-props-categories">
+    <div class="text-center">
+      <h2 class="mb-5"><strong>Properties</strong> by Area</h2>
+    </div>
+    <div *ngIf="areas$ | async as areas">
+      <div class="row mb-4">
+        <div class="col-4">
+          <div
+            bgImg="/assets/cities/architecture-background-balboa-park-2662647.jpg"
+            class="card border-0 area-properties-card">
+            <div class="card-backdrop">
+              <div class="card-body">
+                <h4 class="card-title">{{areas.los_angeles.title}}</h4>
+                <p class="m-0">
+                  <i class="fa fa-home"></i>&nbsp;Properties: {{ areas.los_angeles.count }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div
+            bgImg="/assets/cities/architecture-beach-beach-house-2662653.jpg"
+            class="card border-0 area-properties-card">
+            <div class="card-backdrop">
+              <div class="card-body">
+                <h4 class="card-title">{{areas.sacramento.title}}</h4>
+                <p class="m-0">
+                  <i class="fa fa-home"></i>&nbsp;Properties: {{ areas.sacramento.count }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div
+            bgImg="/assets/cities/backlit-california-century-city-2816168.jpg"
+            class="card border-0 area-properties-card">
+            <div class="card-backdrop">
+              <div class="card-body">
+                <h4 class="card-title">{{areas.san_pedro.title}}</h4>
+                <p class="m-0">
+                  <i class="fa fa-home"></i>&nbsp;Properties: {{ areas.san_pedro.count }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            bgImg="/assets/cities/backlit-california-dawn-2545122.jpg"
+            class="card border-0 area-properties-card">
+            <div class="card-backdrop">
+              <div class="card-body">
+                <h4 class="card-title">{{areas.san_diego.title}}</h4>
+                <p class="m-0">
+                  <i class="fa fa-home"></i>&nbsp;Properties: {{ areas.san_diego.count }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div
+  bgImg="https://images.pexels.com/photos/140963/pexels-photo-140963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  class="container-fluid section-posting-hero-wrapper">
+  <div class="container">
+    <section class="section-posting-hero">
+      <div class="card border-0 w-75">
+        <div class="card-body">
+          <h2 class="display-4">Want to Sell Property?</h2>
+          <p>Let us create a tailored strategic marketing plan and keep track of the selling process.</p>
+          <a routerLink="/" class="btn btn-primary">
+            More details&nbsp;&nbsp;<i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="container-fluid section-testimonials-wrapper">
+  <section class="container section-testimonials">
+    <div class="text-center">
+      <h2 class="mb-5"><strong>Our</strong> Values</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div class="card h-100 border-0">
+          <div class="card-body">
+            <i class="fas fa-comments display-4 mb-3 text-primary"></i>
+            <h3 class="my-3">Ensuring clear communication</h3>
+            <p class="card-text text-muted">We keep you in the loop every step of the way. You can rely on a transparent, comprehensible flow of information.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card h-100 border-0">
+          <div class="card-body">
+            <i class="fas fa-dice-d6 display-4 mb-3 text-primary"></i>
+            <h3 class="my-3">Making the most of technology</h3>
+            <p class="card-text text-muted">Time is precious. We guarantee a high degree of efficiency and a premium level of service by using the right tools.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card h-100 border-0">
+          <div class="card-body">
+            <i class="fas fa-heart display-4 mb-3 text-primary"></i>
+            <h3 class="my-3">Providing excellent customer service</h3>
+            <p class="card-text text-muted">We are passionate about what we do and we take pride in achieving the results that you have in mind.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="container-fluid section-blog-preview-wrapper bg-white">
+  <section class="container section-blog-preview">
+    <div class="text-center">
+      <h2 class="mb-5">Articles &amp; Tips</h2>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-4">
+        <div class="card border-0">
+          <div
+            bgImg="https://images.pexels.com/photos/210538/pexels-photo-210538.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            class="card-img-top">
+          </div>
+          <div class="card-body">
+            <div class="badge badge-primary">Articles &amp; Tips</div>
+            <h3>Lorem ipsum dolor sit.</h3>
+            <hr>
+            <i class="fas fa-clock"></i><span>OCTOBER 12, 2018</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card border-0">
+          <div
+            bgImg="https://images.pexels.com/photos/210538/pexels-photo-210538.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            class="card-img-top">
+          </div>
+          <div class="card-body">
+            <div class="badge badge-primary">Articles &amp; Tips</div>
+            <h3>Fugiat id minima aspernatur.</h3>
+            <hr>
+            <i class="fas fa-clock"></i><span>OCTOBER 12, 2018</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card border-0">
+          <div
+            bgImg="https://images.pexels.com/photos/210538/pexels-photo-210538.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            class="card-img-top">
+          </div>
+          <div class="card-body">
+            <div class="badge badge-primary">Articles &amp; Tips</div>
+            <h3>Neque magni sit facilis?</h3>
+            <hr>
+            <i class="fas fa-clock"></i><span>OCTOBER 12, 2018</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="/" class="btn btn-primary">More</a>
+    </div>
+
+  </section>
+</div>

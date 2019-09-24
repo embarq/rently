@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { groupBy } from 'lodash-es';
 import { Property, LabeledData, PropertyStatsAttribute, PropertyReview } from '../core-model/properties';
 
 @Injectable({
@@ -13,6 +14,28 @@ export class PropertiesService {
 
   public getAll() {
     return this.firestore.collection<Property>('places').valueChanges();
+  }
+
+  public getFeatured() {
+    return this.firestore.collection<Property>('places', q => q.limit(6)).get().pipe(
+      map(snap => snap.docs.map(doc => doc.data() as Property))
+    );
+  }
+
+  public getGroupedByState() {
+    return this.getAll().pipe(
+      map(props => {
+        const cities = groupBy(props, prop => prop.city);
+        return Object.entries(cities).reduce((res, [ key, value ]) => {
+          const snakeCasedKey = key.toLowerCase().replace(/\s/g, '_');
+          res[snakeCasedKey] = {
+            count: value.length,
+            title: key
+          };
+          return res;
+        }, {});
+      })
+    )
   }
 
   public getById(propertyId: Property['id']) {
