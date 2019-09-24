@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  background-color: #212529;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: 0;
+}
+
+.links-row {
+  .links-section-heading {
+    color: #fefefe;
+    margin-bottom: 1rem;
+  }
+
+  .list-unstyled li {
+    padding: 0.4rem 0;
+  }
+
+  .link-light {
+    color: #d5d5d5;
+    font-weight: 300;
+    transition: 100ms ease-out;
+
+    &:hover {
+      color: #fefefe;
+      transition: 100ms ease-in;
+    }
+  }
+}
+
+.social-icon {
+  width: 2rem;
+  height: 2rem;
+  filter: invert(1);
+}
+
+.footer-sections-separator {
+  margin: 3rem 0;
+  border-top: 1px solid #444;
+}
