@@ -5,15 +5,17 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LayoutComponent],
+  declarations: [HeaderComponent, FooterComponent, LayoutComponent, NotFoundComponent],
   imports: [
     CommonModule,
     RouterModule
   ],
   exports: [
-    LayoutComponent
+    LayoutComponent,
+    NotFoundComponent
   ]
 })
 export class ContentModule { }

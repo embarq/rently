@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PropertyResolver } from './core/property.resolver';
+import { NotFoundComponent } from './content/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
     resolve: {
       propertyData: PropertyResolver
     }
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
