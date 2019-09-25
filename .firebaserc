@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "dc-rently"
+  },
+  "targets": {
+    "dc-rently": {
+      "hosting": {
+        "rently": [
+          "dc-rently"
+        ]
+      }
+    }
   }
 }
