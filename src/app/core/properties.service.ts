@@ -26,7 +26,7 @@ export class PropertiesService {
     return this.getAll().pipe(
       map(props => {
         const cities = groupBy(props, prop => prop.city);
-        return Object.entries(cities).reduce((res, [ key, value ]) => {
+        return Object.entries<any>(cities).reduce((res, [ key, value ]) => {
           const snakeCasedKey = key.toLowerCase().replace(/\s/g, '_');
           res[snakeCasedKey] = {
             count: value.length,
