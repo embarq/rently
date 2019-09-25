@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, race } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 
 import { Property, PropertyStatsAttribute, PropertyReview } from 'src/app/core-model/properties';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, first, mapTo } from 'rxjs/operators';
 import { PropertiesService } from 'src/app/core/properties.service';
 
 @Component({
@@ -49,9 +49,11 @@ export class SinglePropertyPageComponent implements OnInit {
     this.reviews$ = propertyId$.pipe(
       switchMap(id => this.propertiesService.getReviews(id))
     );
-    this.localsFeedbackAvailable$ = race(this.stats$, this.reviews$).pipe(
-      map(() => (true)),
-    );
+
+    this.localsFeedbackAvailable$ = merge([this.stats$, this.reviews$]).pipe(
+      first(),
+      mapTo(true)
+    )
 
     this.neighborhoodStatAttributesMapping = {
       1: 'fa-smile',
