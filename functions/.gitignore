@@ -4,5 +4,7 @@
 
 # Typescript v1 declaration files
 typings/
+lib/
+dist/
 
 node_modules/
