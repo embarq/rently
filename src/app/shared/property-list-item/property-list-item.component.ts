@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Property } from 'src/app/core-model/properties';
-import { isEmpty } from 'lodash-es';
+import isEmpty from 'lodash/isEmpty';
 import { environment } from 'src/environments/environment';
 
 @Component({

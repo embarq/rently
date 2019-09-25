@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { groupBy } from 'lodash-es';
+import groupBy from 'lodash/groupBy';
 import { Property, LabeledData, PropertyStatsAttribute, PropertyReview } from '../core-model/properties';
 
 @Injectable({

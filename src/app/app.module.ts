@@ -11,7 +11,7 @@ import { ContentModule } from './content/content.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CoreModule,
     ContentModule
