@@ -5,6 +5,7 @@
     "module": "commonjs"
   },
   "files": [
+    "./src/main.d.ts",
     "src/main.server.ts"
   ],
   "angularCompilerOptions": {

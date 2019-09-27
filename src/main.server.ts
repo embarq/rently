@@ -1,3 +1,5 @@
+/// <reference path="main.d.ts" />
+
 import { enableProdMode } from '@angular/core';
 
 import { environment } from './environments/environment';

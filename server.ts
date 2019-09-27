@@ -16,6 +16,8 @@
  */
 
 import 'zone.js/dist/zone-node';
+(global as any).WebSocket = require('ws');
+(global as any).XMLHttpRequest = require('xhr2');
 
 import * as express from 'express';
 import {join} from 'path';
