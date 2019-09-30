@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import isEmpty from 'lodash/isEmpty';
+import * as isEmpty from 'lodash/isEmpty';
 
 @Component({
   selector: 'rty-icon-param',

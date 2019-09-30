@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import isEmpty from 'lodash/isEmpty';
+import * as isEmpty from 'lodash/isEmpty';
 
 import { PropertiesService } from '../core/properties.service';
 import { Property } from '../core-model/properties';

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { Property } from 'src/app/core-model/properties';
 import { environment } from 'src/environments/environment';
-import isEmpty from 'lodash/isEmpty';
+import * as isEmpty from 'lodash/isEmpty';
 
 @Component({
   selector: 'rty-property-card',
