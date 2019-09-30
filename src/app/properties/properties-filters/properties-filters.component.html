@@ -13,10 +13,12 @@
 
     <label>Price</label>
 
-    <ng5-slider
-      [options]="{ floor: 0, ceil: 30000000, step: 10000 }"
-      class="price-filter-slider">
-    </ng5-slider>
+    <ng-container *hideInUniversal>
+      <ng5-slider
+        [options]="{ floor: 0, ceil: 30000000, step: 10000 }"
+        class="price-filter-slider">
+      </ng5-slider>
+    </ng-container>
 
   </div>
 
