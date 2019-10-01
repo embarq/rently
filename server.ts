@@ -51,7 +51,16 @@ app.get('*.*', express.static(DIST_FOLDER, {
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
-  res.render('index', { req });
+  const startTime = Date.now();
+  res.render('index', { req }, (err, html) => {
+    if (err) {
+      console.error('[rendering error]', err.message);
+      console.error(err);
+      return res.status(500).send(err.message);
+    }
+    console.log('[rendered]', req.path, 'in', Date.now() - startTime, 'ms');
+    res.send(html);
+  });
 });
 
 // Start up the Node server
