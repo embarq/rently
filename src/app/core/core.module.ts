@@ -7,6 +7,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { PropertiesService } from './properties.service';
 import { environment } from 'src/environments/environment';
+import { EnvService } from './env.service';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { environment } from 'src/environments/environment';
     AngularFirestoreModule
   ],
   providers: [
-    PropertiesService
+    PropertiesService,
+    EnvService
   ]
 })
 export class CoreModule { }
