@@ -1,26 +1,42 @@
-// Work around for https://github.com/angular/angular-cli/issues/7200
-
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
   mode: 'none',
   entry: {
-    // This is our Express server for Dynamic universal
     server: './server.ts'
   },
-  externals: {
-    './dist/server/main': 'require("./server/main")'
-  },
   target: 'node',
-  resolve: { extensions: ['.ts', '.js'] },
+  resolve: {
+    extensions: ['.ts', '.js'],
+    mainFields: ['main', 'module', 'browser'],
+    alias: {
+      ['firebase/app']: path.resolve(__dirname, 'node_modules/firebase/app/dist/index.cjs.js'),
+      ['firebase/auth']: path.resolve(__dirname, 'node_modules/firebase/auth/dist/index.cjs.js'),
+      ['firebase/storage']: path.resolve(__dirname, 'node_modules/firebase/storage/dist/index.cjs.js'),
+      ['firebase/firestore']: path.resolve(__dirname, 'node_modules/firebase/firestore/dist/index.cjs.js')
+    },
+  },
+  externals: [
+    /node_modules/,
+    (context, request, callback) => {
+      const regex = new RegExp('^firebase(\/([\w\d]+))*');
+      // exclude firebase products from being bundled
+      // so they will be loaded using require() at runtime.
+      if(regex.test(request)) {
+        return callback(null, 'commonjs ' + request);
+      }
+      callback();
+    }
+  ],
   optimization: {
     minimize: false
   },
   output: {
-    // Puts the output at the root of the dist folder
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    library: 'app',
+    libraryTarget: 'umd',
   },
   module: {
     noParse: /polyfills-.*\.js/,

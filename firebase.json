@@ -7,20 +7,6 @@
   },
   "hosting": [
     {
-      "public": "public",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
       "target": "rently",
       "public": "dist/browser",
       "ignore": [
@@ -31,7 +17,11 @@
       "rewrites": [
         {
           "source": "**",
-          "destination": "/index.html"
+          "function": "ssr"
+        },
+        {
+          "source": "/",
+          "function": "ssr"
         }
       ]
     }
