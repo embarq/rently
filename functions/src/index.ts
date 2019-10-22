@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as firebase from 'firebase';
 
-const conf = require('../../.runtimeconfig.json');
+const conf = functions.config();
 
 /** Fixes firebase imports override in webpack.server.config.js */
 firebase.initializeApp({
