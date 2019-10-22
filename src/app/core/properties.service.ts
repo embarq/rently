@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import * as groupBy from 'lodash/groupBy';
 import { Property, LabeledData, PropertyStatsAttribute, PropertyReview } from '../core-model/properties';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +39,13 @@ export class PropertiesService {
     )
   }
 
-  public getById(propertyId: Property['id']) {
+  public getById(propertyId: Property['id']): Observable<Property> {
     return this.firestore
       .collection('places')
       .doc<Property>(propertyId)
       .get()
       .pipe(
-        map(snap => snap.data())
+        map(snap => snap.data() as Property)
       );
   }
 

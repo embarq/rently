@@ -108,6 +108,7 @@ export interface Property {
   originalUrl: string;
   picturesCollection: string[];
   publicResponseCount: number;
+  previewBannerImageUrl?: string;
   previewImageUrl: string;
   price: number;
   pricePerSquare: number;
