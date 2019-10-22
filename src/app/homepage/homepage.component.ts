@@ -1,8 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import * as isEmpty from 'lodash/isEmpty';
 
 import { PropertiesService } from '../core/properties.service';
 import { Property } from '../core-model/properties';
@@ -18,14 +15,9 @@ export class HomepageComponent implements OnInit {
   areas$: Observable<object>;
 
   constructor(
-    private propertiesService: PropertiesService,
-    private activatedRoute: ActivatedRoute
+    private propertiesService: PropertiesService
   ) {
-    this.featured$ = this.activatedRoute.data.pipe(
-      filter(data => !isEmpty(data.featuredProperties)),
-      map(data => data.featuredProperties)
-    );
-
+    this.featured$ = this.propertiesService.getFeatured();
     this.areas$ = this.propertiesService.getGroupedByState();
   }
 

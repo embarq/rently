@@ -9,11 +9,9 @@ import { PropertiesService } from '../core/properties.service';
 })
 export class HomepageResolverService implements Resolve<Property[]> {
 
-  constructor(
-    private propertiesService: PropertiesService
-  ) { }
+  constructor() { }
 
   resolve() {
-    return this.propertiesService.getFeatured();
+    return null
   }
 }
