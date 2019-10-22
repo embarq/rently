@@ -13,7 +13,8 @@
     "bundle:ssr": "SERVER=true webpack --config webpack.server.config.js --progress --colors",
     "build:ssr": "npm run build:client-and-server-bundles && npm run bundle:ssr",
     "build:client-and-server-bundles": "SERVER=true ng build --prod && SERVER=true ng run rently:server:production --bundleDependencies none",
-    "build:functions": "cd functions; yarn build; cd -"
+    "build:functions": "cd functions; yarn build; cd -",
+    "appconfig": "firebase functions:config:get > .runtimeconfig.json"
   },
   "private": true,
   "dependencies": {

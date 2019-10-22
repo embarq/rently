@@ -2,12 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const { firebase_conf, rapid_api } = require('../../.runtimeconfig.json');
+const remoteConf = require('../../.runtimeconfig.json');
 
 export const environment = {
   production: false,
-  firebase: firebase_conf,
-  remoteAssetsCdn: rapid_api.cdn_url
+  firebase: remoteConf.webclient_conf,
+  remoteAssetsCdn: remoteConf.rapid_api.cdn_url
 };
 
 /*
