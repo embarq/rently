@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, merge } from 'rxjs';
+import { Observable, merge, combineLatest } from 'rxjs';
 
 import { Property, PropertyStatsAttribute, PropertyReview } from 'src/app/core-model/properties';
-import { map, switchMap, tap, first, mapTo } from 'rxjs/operators';
+import { map, switchMap, first, mapTo } from 'rxjs/operators';
 import { PropertiesService } from 'src/app/core/properties.service';
 
 @Component({
   selector: 'rty-single-property-page',
   templateUrl: './single-property-page.component.html',
-  styleUrls: ['./single-property-page.component.scss']
+  styleUrls: ['./single-property-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SinglePropertyPageComponent implements OnInit {
   data$: Observable<Property>;
@@ -22,9 +23,16 @@ export class SinglePropertyPageComponent implements OnInit {
     activatedRoute: ActivatedRoute,
     private propertiesService: PropertiesService
   ) {
-    this.data$ = activatedRoute.data.pipe(
-      map(resolved => resolved.propertyData),
-      map(data => {
+    this.data$ = activatedRoute.params.pipe(
+      map(params => params.id),
+      switchMap(id => {
+        return combineLatest(
+          this.propertiesService.getById(id),
+          this.propertiesService.getFeatures(id),
+          this.propertiesService.getRecords(id)
+        );
+      }),
+      map(([ data, features, records ]) => {
         const prefix = 'https://static.trulia-cdn.com/pictures';
         const picturesCollection = data.picturesCollection.map(entry => {
           return `${ prefix }/${ entry }`;
@@ -33,10 +41,11 @@ export class SinglePropertyPageComponent implements OnInit {
           ...data,
           previewBannerImageUrl: `${ prefix }/${ data.previewBannerImageUrl }`,
           preview: picturesCollection[0],
+          features,
+          records,
           picturesCollection
         }
-      }),
-      tap(console.log)
+      })
     );
 
     const propertyId$ = activatedRoute.params.pipe(
@@ -72,7 +81,7 @@ export class SinglePropertyPageComponent implements OnInit {
       14: 'fa-lightbulb',
       15: 'fa-child',
       16: 'fa-paw',
-    }
+    };
   }
 
   getAttributeIcon(id) {

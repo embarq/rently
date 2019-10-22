@@ -16,10 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'properties/:id',
-    loadChildren: () => import('./single-property/single-property.module').then(m => m.SinglePropertyModule),
-    resolve: {
-      propertyData: PropertyResolver
-    }
+    loadChildren: () => import('./single-property/single-property.module').then(m => m.SinglePropertyModule)
   },
   {
     path: 'not-found',
