@@ -24,8 +24,11 @@ function renderRequest(req, res) {
   console.log(inspect(reqConf, false, 5, true));
 
   const startTime = Date.now();
+  const templateName = process.env.STANDALONE ? 'index' : 'index-template';
+
   req.originalUrl = req.originalUrl.replace('/dc-rently/us-central1/ssr', '');
-  res.render('index-template', { req }, (err, html) => {
+
+  res.render(templateName, { req }, (err, html) => {
     if (err) {
       console.error('[rendering error]', req.path, err.message);
       console.error(err);

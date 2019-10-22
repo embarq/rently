@@ -1,6 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 
+console.log({
+  ['firebase']: path.resolve(__dirname, 'node_modules/firebase/dist/index.node.cjs.js'),
+  ['firebase/app']: path.resolve(__dirname, 'node_modules/firebase/app/dist/index.cjs.js'),
+  ['firebase/auth']: path.resolve(__dirname, 'node_modules/firebase/auth/dist/index.cjs.js'),
+  ['firebase/storage']: path.resolve(__dirname, 'node_modules/firebase/storage/dist/index.cjs.js'),
+  ['firebase/firestore']: path.resolve(__dirname, 'node_modules/firebase/firestore/dist/index.cjs.js')
+});
+
 module.exports = {
   mode: 'none',
   entry: {
@@ -11,6 +19,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
     mainFields: ['main', 'module', 'browser'],
     alias: {
+      ['firebase']: path.resolve(__dirname, 'node_modules/firebase/dist/index.node.cjs.js'),
       ['firebase/app']: path.resolve(__dirname, 'node_modules/firebase/app/dist/index.cjs.js'),
       ['firebase/auth']: path.resolve(__dirname, 'node_modules/firebase/auth/dist/index.cjs.js'),
       ['firebase/storage']: path.resolve(__dirname, 'node_modules/firebase/storage/dist/index.cjs.js'),
