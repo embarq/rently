@@ -1,14 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-console.log({
-  ['firebase']: path.resolve(__dirname, 'node_modules/firebase/dist/index.node.cjs.js'),
-  ['firebase/app']: path.resolve(__dirname, 'node_modules/firebase/app/dist/index.cjs.js'),
-  ['firebase/auth']: path.resolve(__dirname, 'node_modules/firebase/auth/dist/index.cjs.js'),
-  ['firebase/storage']: path.resolve(__dirname, 'node_modules/firebase/storage/dist/index.cjs.js'),
-  ['firebase/firestore']: path.resolve(__dirname, 'node_modules/firebase/firestore/dist/index.cjs.js')
-});
-
 module.exports = {
   mode: 'none',
   entry: {
@@ -17,26 +9,11 @@ module.exports = {
   target: 'node',
   resolve: {
     extensions: ['.ts', '.js'],
-    mainFields: ['main', 'module', 'browser'],
-    alias: {
-      ['firebase']: path.resolve(__dirname, 'node_modules/firebase/dist/index.node.cjs.js'),
-      ['firebase/app']: path.resolve(__dirname, 'node_modules/firebase/app/dist/index.cjs.js'),
-      ['firebase/auth']: path.resolve(__dirname, 'node_modules/firebase/auth/dist/index.cjs.js'),
-      ['firebase/storage']: path.resolve(__dirname, 'node_modules/firebase/storage/dist/index.cjs.js'),
-      ['firebase/firestore']: path.resolve(__dirname, 'node_modules/firebase/firestore/dist/index.cjs.js')
-    },
+    mainFields: ['main', 'module', 'browser']
   },
   externals: [
     /node_modules/,
-    (context, request, callback) => {
-      const regex = new RegExp('^firebase(\/([\w\d]+))*');
-      // exclude firebase products from being bundled
-      // so they will be loaded using require() at runtime.
-      if(regex.test(request)) {
-        return callback(null, 'commonjs ' + request);
-      }
-      callback();
-    }
+    /^firebase/
   ],
   optimization: {
     minimize: false
