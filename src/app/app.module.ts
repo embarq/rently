@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ContentModule } from './content/content.module';
+import { PrebootModule } from 'preboot';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ContentModule } from './content/content.module';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    PrebootModule.withConfig({ appRoot: 'rty-root' }),
     AppRoutingModule,
     CoreModule,
     ContentModule
