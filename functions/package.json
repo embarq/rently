@@ -1,12 +1,9 @@
 {
-  "name": "functions",
+  "name": "rently-functions",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
     "prebuild": "node ./prebuild.js",
-    "serve": "npm run build && firebase serve --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
