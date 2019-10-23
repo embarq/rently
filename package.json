@@ -16,6 +16,8 @@
     "build:client-server:dev": "SERVER=true ng build&& SERVER=true ng run rently:server --bundleDependencies none",
     "build:client-server": "SERVER=true ng build --prod && SERVER=true ng run rently:server:production --bundleDependencies none",
     "build:functions": "cd functions; yarn build; cd -",
+    "build:all": "yarn build:ssr && yarn build:functions",
+    "build:all:dev": "yarn build:ssr:dev && yarn build:functions",
     "appconfig": "firebase functions:config:get > .runtimeconfig.json"
   },
   "private": true,
