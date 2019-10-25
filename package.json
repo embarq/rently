@@ -20,9 +20,11 @@
     "build:functions": "cd functions; npm run build; cd -",
     "build:all": "npm run build:ssr && npm run build:functions",
     "build:all:dev": "npm run build:ssr:dev && npm run build:functions",
-    "appconfig": "firebase functions:config:get > .runtimeconfig.json; cp .runtimeconfig.json functions/.runtimeconfig.json",
+    "appconfig": "firebase functions:config:get > .runtimeconfig.json",
+    "postappconfig": "cp .runtimeconfig.json functions/.runtimeconfig.json",
     "rename-index": "mv dist/browser/index.html dist/browser/index-template.html",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy": "npx firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -41,7 +43,7 @@
     "bootswatch": "^4.3.1",
     "express": "^4.15.2",
     "firebase": "^6.6.1",
-    "firebase-tools": "^6.10.0",
+    "firebase-tools": "7.6.1",
     "ng5-slider": "1.2.4",
     "preboot": "7.0.0",
     "rxjs": "~6.4.0",

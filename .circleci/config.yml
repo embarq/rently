@@ -1,0 +1,89 @@
+version: 2
+jobs:
+    build:
+        working_directory: ~/project
+        docker:
+            - image: circleci/node:10.16.3-browsers
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+            - run:
+                name: Install dependencies
+                command: |
+                    npm install
+                    cd functions
+                    npm install
+                    cd -
+            - save_cache:
+                key: v1-dependencies-{{ checksum "package.json" }}
+                paths:
+                    - node_modules
+            # - run:
+            #     name: Linting
+            #     command: npm run lint
+            # - run:
+            #     name: Testing
+            #     command: npm run test-prod
+            - run:
+                name: Get app config
+                command: npm run appconfig -- --token=$FIREBASE_TOKEN
+            # - run:
+            #     name: Building
+            #     command: npm run build:all
+            - run:
+                name: Build App
+                command: SERVER=true npm run build:app:prod
+            - run:
+                name: Build SSR App
+                command: SERVER=true npm run build:server:prod
+            - run:
+                name: Build Server
+                command: npm run bundle:ssr
+            - run:
+                name: Build Functions
+                command: |
+                  cd functions;
+                  ls;
+                  npm run build;
+                  cd -;
+            - save_cache:
+                key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+                paths:
+                    - functions/dist
+                    - functions/lib
+                    - functions/package.json
+                    - dist
+                    - package.json
+                    - firebase.json
+                    - .firebaserc
+    deploy:
+        docker:
+            - image: circleci/node:10.16.3-browsers
+        working_directory: ~/project
+        steps:
+            - restore_cache:
+                key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+            - run:
+                name: Install Firebase
+                command: |
+                    npm install --save-dev firebase-tools@latest
+                    cd functions
+                    npm i
+                    cd -
+            - run:
+                name: Deploy Master to Firebase
+                command: npm run deploy -- --token=$FIREBASE_TOKEN
+
+workflows:
+    version: 2
+    -deploy:
+        jobs:
+        - build
+        - deploy:
+            requires:
+                - build
+            filters:
+                branches:
+                    only: master
