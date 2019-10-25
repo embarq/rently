@@ -5,7 +5,9 @@
     "build": "tsc",
     "prebuild": "node ./prebuild.js",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "test": "npm run test:ssr",
+    "test:ssr": "ava test/ssr.test.ts"
   },
   "engines": {
     "node": "10"
@@ -16,11 +18,25 @@
     "firebase-admin": "^8.0.0",
     "firebase-functions": "^3.1.0",
     "firebase-tools": "7.6.1",
-    "fs-extra": "8.1.0"
+    "fs-extra": "8.1.0",
+    "request": "2.88.0"
   },
   "devDependencies": {
+    "@types/request-promise-native": "^1.0.17",
+    "ava": "^2.4.0",
+    "request-promise-native": "^1.0.7",
+    "ts-node": "^8.4.1",
     "tslint": "^5.12.0",
     "typescript": "^3.2.2"
   },
-  "private": true
+  "private": true,
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
 }
