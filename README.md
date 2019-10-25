@@ -1,6 +1,4 @@
-# Rently
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
+# Rently [![CircleCI](https://circleci.com/gh/embarq/rently/tree/master.svg?style=svg)](https://circleci.com/gh/embarq/rently/tree/master)
 
 ## Development
 
