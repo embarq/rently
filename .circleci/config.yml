@@ -59,19 +59,19 @@ jobs:
                     - package.json
                     - firebase.json
                     - .firebaserc
-    test_ssr:
-        working_directory: ~/project/functions
-        docker:
-            - image: circleci/node:10.16.3-browsers
-        steps:
-            - restore_cache:
-                key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                name: Install Dependencies
-                command: npm i
-            - run:
-                name: Run SSR E2E Tests
-                command: npm test
+    # test_ssr:
+    #     working_directory: ~/project/functions
+    #     docker:
+    #         - image: circleci/node:10.16.3-browsers
+    #     steps:
+    #         - restore_cache:
+    #             key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+    #         - run:
+    #             name: Install Dependencies
+    #             command: npm i
+    #         - run:
+    #             name: Run SSR E2E Tests
+    #             command: npm test
     deploy:
         docker:
             - image: circleci/node:10.16.3-browsers
