@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './homepage.component';
@@ -13,6 +14,7 @@ import { DirectivesModule } from '../shared/directives/directives.module';
   imports: [
     CommonModule,
     HomepageRoutingModule,
+    LazyLoadImageModule,
     DirectivesModule,
     PropertyCardModule
   ],

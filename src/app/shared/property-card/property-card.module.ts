@@ -4,6 +4,7 @@ import { PropertyCardComponent } from './property-card.component';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { RouterModule } from '@angular/router';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [PropertyCardComponent],
@@ -12,7 +13,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     DirectivesModule,
     RouterModule,
-    PipesModule
+    PipesModule,
+    LazyLoadImageModule
   ]
 })
 export class PropertyCardModule { }
