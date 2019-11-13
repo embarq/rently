@@ -16,6 +16,7 @@ import { PropertyListItemModule } from '../shared/property-list-item/property-li
     PropertiesListComponent,
     PropertiesFiltersComponent
   ],
+  entryComponents: [PropertiesComponent],
   imports: [
     CommonModule,
     DirectivesModule,
