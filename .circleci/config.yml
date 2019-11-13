@@ -75,20 +75,18 @@ jobs:
     deploy:
         docker:
             - image: circleci/node:10.16.3-browsers
-        working_directory: ~/project
+        working_directory: ~/project/functions
         steps:
             - restore_cache:
                 key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
             - run:
-                name: Install Firebase
+                name: Install Dependencies
                 command: |
-                    npm install --save-dev firebase-tools@latest
-                    cd functions
                     npm i
-                    cd -
+                    npm ls --depth 0
             - run:
-                name: Deploy Master to Firebase
-                command: npm run deploy -- --token=$FIREBASE_TOKEN
+                name: Deploy to Firebase
+                command: npm run deploy:all -- --token=$FIREBASE_TOKEN
 
 workflows:
     version: 2

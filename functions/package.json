@@ -5,6 +5,7 @@
     "build": "tsc",
     "prebuild": "node ./prebuild.js",
     "deploy": "firebase deploy --only functions",
+    "deploy:all": "firebase deploy",
     "logs": "firebase functions:log",
     "test": "npm run test:ssr",
     "test:ssr": "ava test/ssr.test.ts"
