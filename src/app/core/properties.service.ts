@@ -43,10 +43,7 @@ export class PropertiesService {
     return this.firestore
       .collection('places')
       .doc<Property>(propertyId)
-      .get()
-      .pipe(
-        map(snap => snap.data() as Property)
-      );
+      .valueChanges();
   }
 
   public getFeatures(propertyId: Property['id']) {
@@ -70,9 +67,6 @@ export class PropertiesService {
       .collection('places')
       .doc(propertyId)
       .collection<DataType>(collection)
-      .get()
-      .pipe(
-        map(snap => snap.docs.map(doc => doc.data() as DataType))
-      );
+      .valueChanges();
   }
 }
