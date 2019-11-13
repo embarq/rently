@@ -10,7 +10,7 @@ export class EnvService {
   isUniversal$: BehaviorSubject<boolean>;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId,
+    @Inject(PLATFORM_ID) platformId,
     private appRef: ApplicationRef
   ) {
     this.isUniversal$ = new BehaviorSubject(isPlatformServer(platformId));
@@ -19,8 +19,9 @@ export class EnvService {
         filter(stable => stable),
         first()
       ).subscribe(() => {
-        console.log('App is stable');
+        console.log('App became stable');
         this.isUniversal$.next(isPlatformServer(platformId));
       });
   }
+
 }
