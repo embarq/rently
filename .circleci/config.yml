@@ -95,9 +95,6 @@ workflows:
     -deploy:
         jobs:
             - build
-            - test_ssr:
-                requires:
-                    - build
             - deploy:
                 requires:
                     - build
