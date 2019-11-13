@@ -1,0 +1,76 @@
+<div
+  *ngIf="data != null"
+  id="details"
+  class="container-fluid bg-light details-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 property-details">
+        <h2 class="h1 mb-4">
+          Apartment Building Having 29 Apartments
+        </h2>
+
+        <strong class="text-primary">{{ data.mortgage.listPrice | currency }}</strong>
+
+        <p>
+          <span class="text-muted">Est. Mortgage:&nbsp;</span>
+          <strong>{{ data.mortgage.paymentEstimate | currency }}/mo</strong>
+        </p>
+
+        <div class="row no-gutters">
+          <div class="col">
+            <span class="text-muted">Created</span>: <strong>September 2, 2018</strong>
+          </div>
+          <div class="col">
+            <span class="text-muted">Last Update</span>: <strong>October 25</strong>
+          </div>
+        </div>
+
+        <hr class="my-5" />
+
+        <div class="row">
+          <div class="col">
+            <rty-icon-param
+              [value]="data.areaSizeSquares"
+              label="Sq Ft"
+              icon="home"
+              class="property-param text-muted">
+            </rty-icon-param>
+          </div>
+          <div class="col">
+            <rty-icon-param
+              [value]="data.beds"
+              label="Beds"
+              icon="bed"
+              class="property-param text-muted">
+            </rty-icon-param>
+          </div>
+          <div class="col">
+            <rty-icon-param
+              [value]="data.bathrooms"
+              label="Baths"
+              icon="bath"
+              class="property-param text-muted">
+            </rty-icon-param>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 d-flex align-items-center">
+        <div class="card property-description-card">
+          <div class="card-body py-4">
+            <div class="card-text">
+              <ng-container *ngIf="data.description; else noDescriptionTempl">
+                {{ data.description }}
+              </ng-container>
+              <ng-template #noDescriptionTempl>
+                <p class="missing-description-alert my-0">
+                  Unfortunatelly this property has no description.
+                  Contact its agent or our support to get more info
+                </p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

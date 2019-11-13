@@ -19,7 +19,7 @@ export class SinglePropertyPageComponent implements OnInit {
   public stats$: Observable<PropertyStatsAttribute[]>;
   public reviews$: Observable<PropertyReview[]>;
   public localsFeedbackAvailable$: Observable<boolean>;
-  public neighborhoodStatAttributesMapping: { [id: number]: string };
+  public propertyId$: Observable<Property['id']>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,17 +32,13 @@ export class SinglePropertyPageComponent implements OnInit {
     this.localsFeedbackAvailable$ = null;
   }
 
-  getAttributeIcon(id) {
-    return this.neighborhoodStatAttributesMapping[id];
-  }
-
   ngOnInit() {
-    const propertyId$ = this.activatedRoute.params.pipe(
+    this.propertyId$ = this.activatedRoute.params.pipe(
       map(params => params['id']),
       first()
     );
 
-    this.data$ = propertyId$.pipe(
+    this.data$ = this.propertyId$.pipe(
       switchMap((id) => this.propertiesService.getById(id)),
       first(),
       map(data => {
@@ -60,16 +56,16 @@ export class SinglePropertyPageComponent implements OnInit {
       share()
     );
 
-    this.features$ = propertyId$.pipe(
+    this.features$ = this.propertyId$.pipe(
       switchMap(id => this.propertiesService.getFeatures(id))
     );
-    this.records$ = propertyId$.pipe(
+    this.records$ = this.propertyId$.pipe(
       switchMap(id => this.propertiesService.getRecords(id))
     );
-    this.stats$ = propertyId$.pipe(
+    this.stats$ = this.propertyId$.pipe(
       switchMap(id => this.propertiesService.getPublicStats(id))
     );
-    this.reviews$ = propertyId$.pipe(
+    this.reviews$ = this.propertyId$.pipe(
       switchMap(id => this.propertiesService.getReviews(id))
     );
 
@@ -77,25 +73,6 @@ export class SinglePropertyPageComponent implements OnInit {
       first(),
       mapTo(true)
     );
-
-    this.neighborhoodStatAttributesMapping = {
-      1: 'fa-smile',
-      2: 'fa-glass-cheers',
-      3: 'fa-hourglass',
-      4: 'fa-candy-cane',
-      5: 'fa-binoculars',
-      6: 'fa-headphones-alt',
-      7: 'fa-dove',
-      8: 'fa-shopping-cart',
-      9: 'fa-utensils',
-      10: 'fa-parking',
-      11: 'fa-car',
-      12: 'fa-moon',
-      13: 'fa-walking',
-      14: 'fa-lightbulb',
-      15: 'fa-child',
-      16: 'fa-paw',
-    };
   }
 
 }

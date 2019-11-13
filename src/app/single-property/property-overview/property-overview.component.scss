@@ -1,0 +1,30 @@
+@import "~bootswatch/dist/flatly/variables";
+
+.property-preview-banner {
+  position: relative;
+  background-color: transparent;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 450px;
+
+  .btn-photos {
+    position: absolute;
+    bottom: 2rem;
+    left: 1rem;
+  }
+}
+
+.property-short-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $gray-900;
+  color: $white;
+  text-align: center;
+
+  .price-info {
+    font-size: 1rem;
+  }
+}

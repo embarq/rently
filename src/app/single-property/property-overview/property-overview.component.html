@@ -1,0 +1,53 @@
+<div
+  *ngIf="data != null"
+  class="container-fluid p-0">
+
+  <div class="row no-gutters">
+    <div class="col-md-7">
+      <div
+        class="property-preview-banner"
+        [bgImg]="data['preview']">
+        <button class="btn btn-light btn-photos text-primary">Photos</button>
+      </div>
+    </div>
+    <div class="col-md-5 property-short-info">
+      <div>
+        <h2 class="mb-4 font-weight-bold">
+          {{ data | composePropAddress }}
+        </h2>
+        <p class="text-muted">
+          <i class="fa fa-circle"></i>&nbsp;{{ data.state }}
+        </p>
+      </div>
+
+      <div class="badge badge-secondary p-3 price-info">{{ data.price | currency }}</div>
+
+      <div class="row">
+        <div class="col">
+          <rty-icon-param
+            [value]="data.areaSizeSquares"
+            label="Sq Ft"
+            icon="home"
+            class="property-param text-muted">
+          </rty-icon-param>
+        </div>
+        <div class="col">
+          <rty-icon-param
+            [value]="data.beds"
+            label="Beds"
+            icon="bed"
+            class="property-param text-muted">
+          </rty-icon-param>
+        </div>
+        <div class="col">
+          <rty-icon-param
+            [value]="data.bathrooms"
+            label="Baths"
+            icon="bath"
+            class="property-param text-muted">
+          </rty-icon-param>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

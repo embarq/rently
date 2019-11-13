@@ -1,0 +1,15 @@
+<div class="row">
+  <div
+    *ngFor="let entry of data"
+    class="col-4">
+
+    <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
+      <span [class]="entry.data === 'Yes' ? 'text-primary' : 'text-muted'">{{ entry.lbl }}</span>
+      <ng-container *ngIf="entry.data !== 'Yes'">
+        :&nbsp;
+        <strong>{{ entry.data }}</strong>
+      </ng-container>
+    </div>
+
+  </div>
+</div>

@@ -7,11 +7,19 @@ import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { DirectivesModule } from '../shared/directives/directives.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { PropertyOverviewComponent } from './property-overview/property-overview.component';
+import { PropertyDetailsComponent } from './property-details/property-details.component';
+import { PropertyAttributesGridComponent } from './property-attributes-grid/property-attributes-grid.component';
+import { PropertyPublicStatsComponent } from './property-public-stats/property-public-stats.component';
 
 
 @NgModule({
   declarations: [
-    SinglePropertyPageComponent
+    SinglePropertyPageComponent,
+    PropertyOverviewComponent,
+    PropertyDetailsComponent,
+    PropertyAttributesGridComponent,
+    PropertyPublicStatsComponent
   ],
   entryComponents: [
     SinglePropertyPageComponent

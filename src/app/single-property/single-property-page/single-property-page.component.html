@@ -1,155 +1,17 @@
-<div
-  *ngIf="data$ | async as data"
-  class="container-fluid p-0">
+<section id="property-overview-section">
+  <rty-property-overview [data]="data$ | async"></rty-property-overview>
+</section>
+<section id="property-details-section">
+  <rty-property-details [data]="data$ | async"></rty-property-details>
+</section>
+<section class="container property-features-section">
+  <div
+    *ngIf="features$ | async as features"
+    class="card border-0">
 
-  <div class="row no-gutters">
-    <div class="col-md-7">
-      <div
-        class="property-preview-banner"
-        [lazyLoad]="data.preview">
-        <button class="btn btn-light btn-photos text-primary">Photos</button>
-      </div>
-    </div>
-    <div class="col-md-5 property-short-info">
-      <div>
-        <h2 class="mb-4 font-weight-bold">
-          {{ data | composePropAddress }}
-        </h2>
-        <p class="text-muted">
-          <i class="fa fa-circle"></i>&nbsp;{{ data.state }}
-        </p>
-      </div>
-
-      <div class="badge badge-secondary p-3 price-info">{{ data.price | currency }}</div>
-
-      <div class="row">
-        <div class="col">
-          <rty-icon-param
-            [value]="data.areaSizeSquares"
-            label="Sq Ft"
-            icon="home"
-            class="property-param text-muted">
-          </rty-icon-param>
-        </div>
-        <div class="col">
-          <rty-icon-param
-            [value]="data.beds"
-            label="Beds"
-            icon="bed"
-            class="property-param text-muted">
-          </rty-icon-param>
-        </div>
-        <div class="col">
-          <rty-icon-param
-            [value]="data.bathrooms"
-            label="Baths"
-            icon="bath"
-            class="property-param text-muted">
-          </rty-icon-param>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  *ngIf="data$ | async as data"
-  id="details"
-  class="container-fluid bg-light details-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-6 property-details">
-        <h2 class="h1 mb-4">
-          Apartment Building Having 29 Apartments
-        </h2>
-
-        <strong class="text-primary">{{ data.mortgage.listPrice | currency }}</strong>
-
-        <p>
-          <span class="text-muted">Est. Mortgage:&nbsp;</span>
-          <strong>{{ data.mortgage.paymentEstimate | currency }}/mo</strong>
-        </p>
-
-        <div class="row no-gutters">
-          <div class="col">
-            <span class="text-muted">Created</span>: <strong>September 2, 2018</strong>
-          </div>
-          <div class="col">
-            <span class="text-muted">Last Update</span>: <strong>October 25</strong>
-          </div>
-        </div>
-
-        <hr class="my-5" />
-
-        <div class="row">
-          <div class="col">
-            <rty-icon-param
-              [value]="data.areaSizeSquares"
-              label="Sq Ft"
-              icon="home"
-              class="property-param text-muted">
-            </rty-icon-param>
-          </div>
-          <div class="col">
-            <rty-icon-param
-              [value]="data.beds"
-              label="Beds"
-              icon="bed"
-              class="property-param text-muted">
-            </rty-icon-param>
-          </div>
-          <div class="col">
-            <rty-icon-param
-              [value]="data.bathrooms"
-              label="Baths"
-              icon="bath"
-              class="property-param text-muted">
-            </rty-icon-param>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 d-flex align-items-center">
-        <div class="card property-description-card">
-          <div class="card-body py-4">
-            <div class="card-text">
-
-              <ng-container *ngIf="data.description; else noDescriptionTempl">
-                {{ data.description }}
-              </ng-container>
-              <ng-template #noDescriptionTempl>
-                <p class="missing-description-alert my-0">
-                  Unfortunatelly this property has no description.
-                  Contact its agent or our support to get more info
-                </p>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container property-features-section">
-  <div *ngIf="features$ | async as features" class="card border-0">
     <div class="card-body bg-light">
       <h3 class="mb-3">Amenities & Features</h3>
-
-      <div class="row">
-        <div
-          *ngFor="let entry of features"
-          class="col-4">
-
-          <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
-            <span [class]="entry.data === 'Yes' ? 'text-primary' : 'text-muted'">{{ entry.lbl }}</span>
-            <ng-container *ngIf="entry.data !== 'Yes'">
-              :&nbsp;
-              <strong>{{ entry.data }}</strong>
-            </ng-container>
-          </div>
-
-        </div>
-      </div>
+      <rty-property-attributes-grid [data]="features"></rty-property-attributes-grid>
     </div>
   </div>
 
@@ -158,25 +20,10 @@
     class="card border-0 mt-3">
     <div class="card-body bg-light">
       <h4 class="mb-3">Public records</h4>
-
-      <div class="row">
-        <div
-          *ngFor="let entry of records"
-          class="col-md-4">
-
-          <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
-            <span [class]="entry.data === 'Yes' ? 'text-primary' : 'text-muted'">{{ entry.lbl }}</span>
-            <ng-container *ngIf="entry.data !== 'Yes'">
-              :&nbsp;
-              <strong>{{ entry.data }}</strong>
-            </ng-container>
-          </div>
-
-        </div>
-      </div>
+      <rty-property-attributes-grid [data]="records"></rty-property-attributes-grid>
     </div>
   </div>
-</div>
+</section>
 
 <div
   *ngIf="localsFeedbackAvailable$ | async"
@@ -185,30 +32,9 @@
   <div class="card border-0">
     <div class="card-body bg-light">
       <h3>What Locals Say</h3>
-      <ng-container *ngIf="stats$ | async as publicStats">
-        <p class="text-muted mb-4">At least {{ (data$ | async)?.publicResponseCount }} Rently users voted on each feature.</p>
+      <p class="text-muted mb-4">At least {{ (data$ | async)?.publicResponseCount }} Rently users voted on each feature.</p>
 
-        <div class="row">
-          <div
-            *ngFor="let entry of publicStats"
-            class="col-4">
-            <div class="row no-gutters feedback-stat-entry">
-              <div class="col-3">
-                <div class="badge badge-primary feedback-stat-badge text-light w-100">
-                  <i class="fas fa-thumbs-up"></i>&nbsp;
-                  <span class="feedback-stat-score-value">{{ entry.score }}%</span>
-                </div>
-              </div>
-              <div class="col-2 text-center text-primary">
-                <span class="fas {{ getAttributeIcon(entry.attributeId) }} feedback-stat-category-icon"></span>
-              </div>
-              <div class="col-7">
-                {{ entry.name }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
+      <rty-property-public-stats [data]="stats$ | async"></rty-property-public-stats>
     </div>
   </div>
 
