@@ -6,18 +6,23 @@ import { SinglePropertyPageComponent } from './single-property-page/single-prope
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { DirectivesModule } from '../shared/directives/directives.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
   declarations: [
     SinglePropertyPageComponent
   ],
+  entryComponents: [
+    SinglePropertyPageComponent
+  ],
   imports: [
     CommonModule,
+    SinglePropertyRoutingModule,
     PipesModule,
     DirectivesModule,
     SharedModule,
-    SinglePropertyRoutingModule
+    LazyLoadImageModule
   ]
 })
 export class SinglePropertyModule { }

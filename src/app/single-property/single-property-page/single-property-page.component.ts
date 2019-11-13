@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, merge, combineLatest } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 
-import { Property, PropertyStatsAttribute, PropertyReview } from 'src/app/core-model/properties';
-import { map, switchMap, first, mapTo } from 'rxjs/operators';
+import { Property, PropertyStatsAttribute, PropertyReview, LabeledData } from 'src/app/core-model/properties';
+import { map, switchMap, first, mapTo, tap, take, startWith, share } from 'rxjs/operators';
 import { PropertiesService } from 'src/app/core/properties.service';
 
 @Component({
@@ -13,26 +13,39 @@ import { PropertiesService } from 'src/app/core/properties.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SinglePropertyPageComponent implements OnInit {
-  data$: Observable<Property>;
-  stats$: Observable<PropertyStatsAttribute[]>;
-  reviews$: Observable<PropertyReview[]>;
-  neighborhoodStatAttributesMapping: { [id: number]: string };
-  localsFeedbackAvailable$: Observable<boolean>;
+  public data$: Observable<Property>;
+  public features$: Observable<LabeledData[]>;
+  public records$: Observable<LabeledData[]>;
+  public stats$: Observable<PropertyStatsAttribute[]>;
+  public reviews$: Observable<PropertyReview[]>;
+  public localsFeedbackAvailable$: Observable<boolean>;
+  public neighborhoodStatAttributesMapping: { [id: number]: string };
 
   constructor(
-    activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private propertiesService: PropertiesService
   ) {
-    this.data$ = activatedRoute.params.pipe(
-      map(params => params.id),
-      switchMap(id => {
-        return combineLatest(
-          this.propertiesService.getById(id),
-          this.propertiesService.getFeatures(id),
-          this.propertiesService.getRecords(id)
-        );
-      }),
-      map(([ data, features, records ]) => {
+    this.features$ = null;
+    this.records$ = null;
+    this.stats$ = null;
+    this.reviews$ = null;
+    this.localsFeedbackAvailable$ = null;
+  }
+
+  getAttributeIcon(id) {
+    return this.neighborhoodStatAttributesMapping[id];
+  }
+
+  ngOnInit() {
+    const propertyId$ = this.activatedRoute.params.pipe(
+      map(params => params['id']),
+      first()
+    );
+
+    this.data$ = propertyId$.pipe(
+      switchMap((id) => this.propertiesService.getById(id)),
+      first(),
+      map(data => {
         const prefix = 'https://static.trulia-cdn.com/pictures';
         const picturesCollection = data.picturesCollection.map(entry => {
           return `${ prefix }/${ entry }`;
@@ -41,17 +54,18 @@ export class SinglePropertyPageComponent implements OnInit {
           ...data,
           previewBannerImageUrl: `${ prefix }/${ data.previewBannerImageUrl }`,
           preview: picturesCollection[0],
-          features,
-          records,
           picturesCollection
         }
-      })
+      }),
+      share()
     );
 
-    const propertyId$ = activatedRoute.params.pipe(
-      map(params => params['id'])
+    this.features$ = propertyId$.pipe(
+      switchMap(id => this.propertiesService.getFeatures(id))
     );
-
+    this.records$ = propertyId$.pipe(
+      switchMap(id => this.propertiesService.getRecords(id))
+    );
     this.stats$ = propertyId$.pipe(
       switchMap(id => this.propertiesService.getPublicStats(id))
     );
@@ -62,7 +76,7 @@ export class SinglePropertyPageComponent implements OnInit {
     this.localsFeedbackAvailable$ = merge([this.stats$, this.reviews$]).pipe(
       first(),
       mapTo(true)
-    )
+    );
 
     this.neighborhoodStatAttributesMapping = {
       1: 'fa-smile',
@@ -82,13 +96,6 @@ export class SinglePropertyPageComponent implements OnInit {
       15: 'fa-child',
       16: 'fa-paw',
     };
-  }
-
-  getAttributeIcon(id) {
-    return this.neighborhoodStatAttributesMapping[id];
-  }
-
-  ngOnInit() {
   }
 
 }

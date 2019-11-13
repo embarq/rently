@@ -6,7 +6,7 @@
     <div class="col-md-7">
       <div
         class="property-preview-banner"
-        [bgImg]="data.preview">
+        [lazyLoad]="data.preview">
         <button class="btn btn-light btn-photos text-primary">Photos</button>
       </div>
     </div>
@@ -112,7 +112,16 @@
         <div class="card property-description-card">
           <div class="card-body py-4">
             <div class="card-text">
-              {{ data.description }}
+
+              <ng-container *ngIf="data.description; else noDescriptionTempl">
+                {{ data.description }}
+              </ng-container>
+              <ng-template #noDescriptionTempl>
+                <p class="missing-description-alert my-0">
+                  Unfortunatelly this property has no description.
+                  Contact its agent or our support to get more info
+                </p>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -121,16 +130,14 @@
   </div>
 </div>
 
-<div
-  *ngIf="data$ | async as data"
-  class="container property-features-section">
-  <div class="card border-0">
+<div class="container property-features-section">
+  <div *ngIf="features$ | async as features" class="card border-0">
     <div class="card-body bg-light">
       <h3 class="mb-3">Amenities & Features</h3>
 
       <div class="row">
         <div
-          *ngFor="let entry of data.features"
+          *ngFor="let entry of features"
           class="col-4">
 
           <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
@@ -146,13 +153,15 @@
     </div>
   </div>
 
-  <div class="card border-0 mt-3">
+  <div
+    *ngIf="records$ | async as records"
+    class="card border-0 mt-3">
     <div class="card-body bg-light">
       <h4 class="mb-3">Public records</h4>
 
       <div class="row">
         <div
-          *ngFor="let entry of data.records"
+          *ngFor="let entry of records"
           class="col-md-4">
 
           <div class="badge badge-white text-primary mb-2 p-3 text-left w-100">
