@@ -21,6 +21,7 @@
     "build:all": "npm run build:ssr && npm run build:functions",
     "build:all:dev": "npm run build:ssr:dev && npm run build:functions",
     "appconfig": "firebase functions:config:get > .runtimeconfig.json",
+    "appconfig:ci": "npm run appconfig -- --token $FIREBASE_TOKEN",
     "postappconfig": "cp .runtimeconfig.json functions/.runtimeconfig.json",
     "rename-index": "mv dist/browser/index.html dist/browser/index-template.html",
     "lint": "ng lint",
