@@ -20,6 +20,8 @@
     "build:functions": "cd functions; npm run build; cd -",
     "build:all": "npm run build:ssr && npm run build:functions",
     "build:all:dev": "npm run build:ssr:dev && npm run build:functions",
+    "build:netlify": "npm run appconfig:ci && npm run build:app:prod",
+    "postbuild:netlify": "cp etc/netlify_redirect dist/browser/_redirect",
     "appconfig": "firebase functions:config:get > .runtimeconfig.json",
     "appconfig:ci": "npm run appconfig -- --token $FIREBASE_TOKEN",
     "postappconfig": "cp .runtimeconfig.json functions/.runtimeconfig.json",
